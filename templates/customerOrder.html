@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+	<h1>Hi, {{ current_user.username }}!</h1>
+    
+    <h2><span class="glyphicon glyphicon-leaf"></span> Buy from MedStock</h2>
+	
+  <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(form, button_map={'submit': 'primary'}) }}
+        </div>
+    </div>
+<br>
+ <h2 class="text-danger"><span class="glyphicon glyphicon-th-list"></span> Medicine Stock Available in Pharmacy</h2>
+	<table class="table table-striped table-bordered table-hover">
+         <thead>
+            <tr>
+               	<th>MedID</th>
+		        <th>MedName</th>
+               	<th>Manufacturer Id</th>
+               	<th>Manufacturer Name</th>
+               	<th>Available Quantity</th>
+	       	    <th>Price</th>
+	       	    <th>Expiry Date</th>
+            </tr>
+         </thead>
+
+         <tbody>
+            {% for p in medicinestock %}
+               <tr>
+                  <td>{{ p.medId }}</td>
+                  <td>{{ p.medName }}</td>
+                  <td>{{ p.manufId }}</td>
+                  <td>{{ p.manufName }}</td>
+		          <td>{{ p.availQnty }}</td>
+		          <td>{{ p.CO1 }}</td>
+		          <td>{{ p.expDate }}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+<br>
+{% endblock %}

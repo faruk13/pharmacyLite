@@ -1,0 +1,55 @@
+{% extends 'bootstrap/base.html' %}
+    
+    {% block title %}
+      {% if title %} {{ title }}
+      {% else %} Pharmacy Mgmt DB {% endif %}
+    {% endblock %}
+
+{% block navbar %}
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ url_for('index') }}"><span class="glyphicon glyphicon-fire"></span> Pharmacy DB</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="{{ url_for('index') }}"> <span class="glyphicon glyphicon-apple"></span> Home</a></li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if current_user.is_anonymous %}
+                    <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in"></span>  Login</a></li>
+                    {% else %}
+                    <li><a href="{{ url_for('addToMedStock') }}"><span class="glyphicon glyphicon-plus"></span> Add to Med Stock</a></li>
+                    <li><a href="{{ url_for('customerOrder')  }}"><span class="glyphicon glyphicon-gift"></span> Sell Meds</a></li>
+                    <li><a href="{{ url_for('previousOrders')}}"><span class="glyphicon glyphicon-sunglasses"></span> Check Previous Orders</a></li>
+                    <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-info" role="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {% block app_content %}{% endblock %}
+    </div>
+{% endblock %}
+
+
+
