@@ -31,9 +31,6 @@ class Manuf(db.Model):
     manufId=db.Column(db.Integer, primary_key=True)
     manufName=db.Column(db.String(120), index=True, unique=True)
 
-#    availMedId=db.Column(db.Integer, db.ForeignKey('MedStock.medId'))
-#    availManufQnty=db.Column(db.Integer)
-
     def __repr__(self):
         return '<Manuf {}>'.format(self.manufName)
 
