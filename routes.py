@@ -99,14 +99,13 @@ def customerOrder():
         db.session.commit()
         flash(str(med1.medName + ' stock has been updated(reduced) in MedStock'), 'info1')
 
-        return redirect(url_for('index')) ##who bought what url should also be added
+        return redirect(url_for('index'))
     return render_template('customerOrder.html', title='Customer Order', form=form,
                                                     medicinestock=MedStock.query.all(), 
                                                     info1=info1, info2=info2)
         
 @app.route('/previousOrders', methods=['GET', 'POST'])
 def previousOrders():
-    #m=MedStock.query.filter_by(medId=form.medId.data).first()
     totCost=int(1)
     return render_template('previousOrders.html', title='Previous Orders',
                                                 boughtList=BoughtBy.query.all(),
