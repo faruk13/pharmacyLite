@@ -14,7 +14,6 @@ import datetime
 @app.route('/index')
 @login_required
 def index():
-   # user = {'username': 'admin'}
     info=None
     for m in MedStock.query.all():
         g=m.availQnty
@@ -34,9 +33,8 @@ def login():
             #checks with pass entered by input user
             flash('Invalid username or password')
             return redirect(url_for('login'))
-        login_user(user, remember=True) #form.rememberMe.data
+        login_user(user, remember=True)
         next_page = request.args.get('next')
-        #using next as one of the arg to get next page url
         if not next_page or url_parse(next_page).netloc != '': 
             #next arg has no val in url then go to index
             next_page = url_for('index')
